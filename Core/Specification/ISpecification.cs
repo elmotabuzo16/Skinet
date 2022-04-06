@@ -12,5 +12,10 @@ namespace Core.Specification
         List<Expression<Func<T, object>>> Includes { get; }
         Expression<Func<T, object>> OrderBy { get; }
         Expression<Func<T, object>> OrderByDescending { get; }
+        
+        // Paginations
+        int Take { get; }
+        int Skip { get; }
+        bool isPagingEnabled { get; }
     }
 }
