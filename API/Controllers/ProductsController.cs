@@ -34,15 +34,21 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
+
+        // {{url}}/api/products
+        // {{url}}/api/products?sort=priceAsc
+        // {{url}}/api/products?sort=priceDesc
+        // {{url}}/api/products?pageSize=3&pageIndex=3
+        // {{url}}/api/products?typeId=3&brandId=2
+        // {{url}}/api/products?brandId=2&sort=priceDesc&pageSize=6
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams productParams)
         {
-            // {{url}}/api/products
-            // {{url}}/api/products?sort=priceAsc
-            // {{url}}/api/products?sort=priceDesc
+
 
             var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
-
+            
+            // Counting total number of products
             var countSpec = new ProductWithFilterFourCountSpecification(productParams);
 
             var totalItems = await _productsRepo.CountAsync(countSpec);
