@@ -14,7 +14,7 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(brandId?: number, typeId?: number) {
+  getProducts(brandId?: number, typeId?: number, sort?: string) {
 
     // this is for query string like products?brandId=3 or products?typeId=1
     let params = new HttpParams();
@@ -23,6 +23,9 @@ export class ShopService {
     }
     if(typeId) {
       params = params.append('typeId', typeId.toString());
+    }
+    if(sort) {
+      params = params.append('sort', sort)
     }
 
     return this.http.get<IPagination>(this.baseUrl + 'products?pageSize=50', {observe: 'response', params})
