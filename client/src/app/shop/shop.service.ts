@@ -19,9 +19,11 @@ export class ShopService {
 
     // this is for query string like products?brandId=3 or products?typeId=1
     let params = new HttpParams();
+
     if(shopParams.brandId !== 0) {
       params = params.append('brandId', shopParams.brandId.toString());
     }
+    
     if(shopParams.typeId !== 0) {
       params = params.append('typeId', shopParams.typeId.toString());
     }

@@ -38,11 +38,24 @@
 
             </ul>
         </section>
-
+  
         <section class="col-9">
             <div class="d-flex justify-content-between align-items-center pb-2">
                 <header>
-                    <span>Showing <strong>10</strong> of <strong>16</strong> Results </span>
+                    <span *ngIf="this.totalCount && this.totalCount > 0">
+                        Showing
+                         <strong>
+                            {{(this.shopParams.pageNumber-1) * this.shopParams.pageSize+1}} - 
+                            {{this.shopParams.pageNumber*this.shopParams.pageSize 
+                                > totalCount
+                                ? totalCount : this.shopParams.pageNumber * this.shopParams.pageSize
+                            }}
+                         </strong> of <strong>16</strong> Results 
+                    </span>
+
+                    <span *ngIf="this.totalCount === 0">
+                        There are <strong>0</strong> results for this filter
+                    </span>
                 </header>
 
                 <div class="form-inline mt-2">
