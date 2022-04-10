@@ -1,9 +1,9 @@
 <div class="card h-100 shadow-sm">
-    <!-- <img src=" {{productFromparent.pictureUrl}} " alt="{{productFromparent.name}}" class="img-fluid bg-info"> -->
+    <img [src]="sanitizeImageUrl(productFromParent.pictureUrl)" alt="{{productFromParent.name}}" class="img-fluid bg-info">
 
     <div class="card-body d-flex flex-column">
 
-      <a href="#">
+      <a routerLink="/shop/{{productFromParent.id}}">
         <h6 class="text-uppdercase">{{productFromParent.name}}</h6>
       </a>
 
@@ -11,7 +11,7 @@
 
       <div class="btn-group mt-auto">
         <button type="button" class="btn btn-outline-secondary fa fa-shopping-cart mr-2"></button>
-        <button type="button" class="btn btn-outline-secondary">Edit</button>
+        <button routerLink="/shop/{{productFromParent.id}}" routerLinkActive="router-link-active"  type="button" class="btn btn-outline-secondary">Edit</button>
       </div>
     </div>
 

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { IProduct } from './../../shared/models/product';
 
 @Component({
@@ -10,11 +11,13 @@ import { IProduct } from './../../shared/models/product';
 export class ProductItemComponent implements OnInit {
   @Input() productFromParent!: IProduct;
 
-  constructor() { 
-
-  }
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+  }
+
+  sanitizeImageUrl(imageUrl: string) {
+    return this.sanitizer.bypassSecurityTrustUrl(this.productFromParent.pictureUrl);
   }
 
 }
