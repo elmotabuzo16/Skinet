@@ -19,17 +19,20 @@ export class ShopService {
 
     // this is for query string like products?brandId=3 or products?typeId=1
     let params = new HttpParams();
-    if(shopParams.brandId) {
+    if(shopParams.brandId !== 0) {
       params = params.append('brandId', shopParams.brandId.toString());
     }
-    if(shopParams.typeId) {
+    if(shopParams.typeId !== 0) {
       params = params.append('typeId', shopParams.typeId.toString());
     }
-    if(shopParams.sort) {
-      params = params.append('sort', shopParams.sort)
-    }
 
-    return this.http.get<IPagination>(this.baseUrl + 'products?pageSize=50', {observe: 'response', params})
+    params = params.append('sort', shopParams.sort)
+
+    //Adding pagination
+    params = params.append('pageIndex', shopParams.pageNumber.toString());
+    params = params.append('pageIndex', shopParams.pageSize.toString());
+
+    return this.http.get<IPagination>(this.baseUrl + 'products', {observe: 'response', params})
     .pipe(
       map(response => {
         return response.body;
